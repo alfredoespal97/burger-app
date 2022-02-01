@@ -77,7 +77,7 @@ class InformationScreen extends StatelessWidget {
                   Text('versión 1.0.0', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),),
                   Padding(
                     padding: const EdgeInsets.only( bottom: 35),
-                    child: Text('Burger App', style: TextStyle(color: Colors.white,fontSize: 23, fontWeight: FontWeight.bold  ),),
+                    child: Text('Burger Shop', style: TextStyle(color: Colors.white,fontSize: 23, fontWeight: FontWeight.bold  ),),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
