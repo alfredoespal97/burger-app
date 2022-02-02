@@ -3,7 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hamburger_app/constants.dart';
 import 'package:hamburger_app/model/burger.dart';
+import 'package:hamburger_app/provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
   final Burger burger;
@@ -19,13 +21,14 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final changeTheme = Provider.of<ChangeTheme>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: kPrimaryColor,
+            backgroundColor: changeTheme.isdarktheme? Colors.black38 : Colors.white60,
             pinned: true,
             snap: true,
             floating: true,
@@ -35,9 +38,15 @@ class DetailScreen extends StatelessWidget {
             flexibleSpace: Stack(
               children: <Widget>[
                 Positioned.fill(
-                    child: Image.network(
-                      burger.image,
-                      fit: BoxFit.cover,
+                    child: Hero(
+                      tag:burger.image,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                        child: Image.network(
+                          burger.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ))
               ],
             ),
@@ -49,7 +58,7 @@ class DetailScreen extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: const BoxDecoration(
-                      color: Colors.white,
+                     // color: Colors.white,
                       // borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30))
                     ),
                     child: Column(

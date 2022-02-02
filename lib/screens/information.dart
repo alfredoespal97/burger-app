@@ -16,7 +16,6 @@ class InformationScreen extends StatelessWidget {
 
       ),
       body:Container(
-        color: Colors.white,
         child: Column(
           children: <Widget>[
             Container(
@@ -65,7 +64,7 @@ class InformationScreen extends StatelessWidget {
 
                           child: CircleAvatar(
                             radius: 40,
-                            backgroundImage: AssetImage('assets/images/burger.png'),
+                            backgroundImage: AssetImage('assets/images/icon.png'),
                           ),
                         ),
                       ),

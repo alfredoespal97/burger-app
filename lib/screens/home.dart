@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hamburger_app/components/card.dart';
+import 'package:hamburger_app/provider/provider.dart';
 import 'package:hamburger_app/screens/detail.dart';
 import 'package:hamburger_app/screens/information.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +11,7 @@ import 'package:hamburger_app/components/app_bar.dart';
 import 'package:hamburger_app/components/body.dart';
 import 'package:hamburger_app/constants.dart';
 import 'package:hamburger_app/model/burger.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -44,12 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final changeTheme = Provider.of<ChangeTheme>(context);
     var size=MediaQuery.of(context).size;
     var width=size.width;
     var height=size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor:changeTheme.isdarktheme? Colors.black38 : Colors.white60,
         elevation: 0,
         title: RichText(text: TextSpan(
             style: Theme.of(context).textTheme.subtitle1!.copyWith(fontWeight: FontWeight.bold,),
@@ -66,7 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         actions: [
-          IconButton(onPressed: fetchBurgerData, icon: Icon(Icons.refresh,color: kPrimaryColor,))
+          IconButton(onPressed: fetchBurgerData, icon: Icon(Icons.refresh,color: kPrimaryColor,)),
+          Switch(
+            activeColor: kPrimaryColor,
+              value: changeTheme.isdarktheme,
+              onChanged: (_) {
+                changeTheme.isdarktheme = _;
+              })
         ],
       ),
       body: Center(
